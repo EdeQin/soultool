@@ -14,3 +14,20 @@ chrome.contextMenus.onClicked.addListener(
 	}
 
 )
+
+chrome.runtime.onMessage.addListener(
+	function(request, sender, sendResponse){
+		if (request.contentScriptQuery == "fetchReply") {
+		    response = $.ajax({
+				type: 'POST',
+				async: false,
+				url: 'http://openapi.tuling123.com/openapi/api/v2',
+				data: JSON.stringify(request.data),
+				success: function(message){
+					sendResponse(message)
+				}
+			})
+	    }
+	}
+
+)
