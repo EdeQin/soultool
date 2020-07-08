@@ -1,0 +1,23 @@
+{
+    "name": "SoulTool",
+    "version": "1.0.0",
+    "manifest_version": 2,
+    "description": "extension by EdmondoCin",
+    "browser_action": {
+        "default_title": "soul tool",
+        "default_icon": "icon.png",
+        "default_popup": "popup.html"
+    },
+    "background" : {
+    	"scripts": ["background.js"],
+    	"persistent": false
+    },
+    "content_scripts": [
+    	{
+    		"matches": ["http://192.168.1.116:3002/*"],
+    		"js": ["jquery-3.5.1.min.js","mynet.js"]
+    	}
+    ],
+    "permissions": ["contextMenus","tabs", "activeTab"]
+
+}
