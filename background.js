@@ -17,6 +17,7 @@ chrome.contextMenus.onClicked.addListener(
 
 chrome.runtime.onMessage.addListener(
 	function(request, sender, sendResponse){
+		console.warn(JSON.stringify(request.data))
 		if (request.contentScriptQuery == "fetchReply") {
 		    response = $.ajax({
 				type: 'POST',
