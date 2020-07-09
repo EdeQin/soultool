@@ -1,22 +1,22 @@
 $(function(){
-	if($('div.list').children().last().hasClass("left")){
     function sendRequest(reqData){
-		chrome.runtime.sendMessage(
-			{
-				contentScriptQuery: "fetchReply",data: reqData
-			},
-			function(response){
-				try{
-				   console.warn(JSON.parse(response)["results"][0]["values"]["text"])
-				   $("#input").text(JSON.parse(response)["results"][0]["values"]["text"])
-				   $(".footer .button").click()
-				}catch(err){
-				   $("#input").text("快让小覃来修理下, 我吐出了一堆错误信息："+err+"")
-				   $(".footer .button").click()
+	    if(!$("#input").text()){
+			chrome.runtime.sendMessage(
+				{
+					contentScriptQuery: "fetchReply",data: reqData
+				},
+				function(response){
+					try{
+					   // $("#input").text($("#input").text()+"ok")
+					   $("#input").text(JSON.parse(response)["results"][0]["values"]["text"])
+					   // $(".footer .button").click()
+					}catch(err){
+					   $("#input").text($("#input").text()+"快让小覃来修理下, 我吐出了一堆错误信息："+err+"")
+					   // $(".footer .button").click()
+					}
 				}
-			}
-		)
-	}
+			)
+		}
     }
 
 	function delayTime() {
@@ -29,10 +29,10 @@ $(function(){
 
 	let observer = new MutationObserver(mutations => {
 	    for(let mutation of mutations) {
-	    	// console.warn(JSON.stringify(mutation.addedNodes))
+	    	// console.warn(JSON.stringify(mutations))
 	    	// console.warn(typeof(mutation.addedNodes))
 	        for(let addedNode of mutation.addedNodes) {
-	            if ( addedNode.className == "message left" && $('div.list').children().last().hasClass("left")) {
+	            if ( addedNode.className == "message left" && $('div.list').children().last().text().trim()) {
 					reqData = {
 						"reqType":0,
 					    "perception": {
@@ -45,13 +45,16 @@ $(function(){
 					        "userId": "320616"
 					    }
 					}
+					console.warn("t1")
 					console.warn($('div.list').children().last().text())
-					console.warn(delayTime())
+					console.warn("t1")
+					// sendRequest(reqData)
                     setTimeout(sendRequest,delayTime(),reqData)  //延时回复，避免频率过高
 
 	            }
 	        }
 	    }
+	    $(".footer .button").click()
 	});
     observer.observe(document.body, { childList: true, subtree: true });
 })
