@@ -28,16 +28,15 @@ $(function(){
 
 
 	let observer = new MutationObserver(mutations => {
+		// console.warn(mutations)
 	    for(let mutation of mutations) {
-	    	// console.warn(JSON.stringify(mutations))
-	    	// console.warn(typeof(mutation.addedNodes))
 	        for(let addedNode of mutation.addedNodes) {
-	            if ( addedNode.className == "message left" && $('div.list').children().last().text().trim()) {
+	            if ( addedNode.className == "message left" && addedNode.innerText) {
 					reqData = {
 						"reqType":0,
 					    "perception": {
 					        "inputText": {
-					            "text": $('div.list').children().last().text()
+					            "text": addedNode.innerText
 					        }
 					    },
 					    "userInfo": {
@@ -46,17 +45,16 @@ $(function(){
 					    }
 					}
 					console.warn("t1")
-					console.warn($('div.list').children().last().text())
+					console.warn(addedNode.innerText)
 					console.warn("t1")
 					// sendRequest(reqData)
                     setTimeout(sendRequest,delayTime(),reqData)  //延时回复，避免频率过高
-
 	            }
 	        }
 	    }
 	    $(".footer .button").click()
 	});
-    observer.observe(document.body, { childList: true, subtree: true });
+    observer.observe(document.querySelector("#app > div > div.chat-panel > div.chat > div"), { childList: true,subtree:true });
 })
 
 
