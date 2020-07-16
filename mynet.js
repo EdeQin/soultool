@@ -1,4 +1,6 @@
 $(function(){
+	var bg = chrome.extension.getBackgroundPage();
+
     function sendRequest(reqData){
 	    if(!$("#input").text()){
 			chrome.runtime.sendMessage(
@@ -40,7 +42,7 @@ $(function(){
 					        }
 					    },
 					    "userInfo": {
-					        "apiKey": "cac38cf5cb9047d2bdbd1d19ab54c9b5",
+					        "apiKey": bg.turin_token,
 					        "userId": "320616"
 					    }
 					}

@@ -1,8 +1,8 @@
-var count=0;
+var turin_token="cac38cf5cb9047d2bdbd1d19ab54c9b5";
 
 chrome.contextMenus.create({
 	id: 'search_with_baidu',
-	title: '使用百度搜索： "%s"',
+	title: '使用百度搜索："%s"',
 	contexts: ["selection"]
 })
 
