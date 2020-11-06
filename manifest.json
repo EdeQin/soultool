@@ -1,10 +1,10 @@
 {
-    "name": "SoulTool",
+    "name": "小覃助手",
     "version": "1.0.0",
     "manifest_version": 2,
-    "description": "extension by EdmondoCin",
+    "description": "extension by EdmondoCin(xe8xa6x83@edmondocin.cn)",
     "browser_action": {
-        "default_title": "soul tool",
+        "default_title": "小覃助手",
         "default_icon": "icon.png",
         "default_popup": "popup.html"
     },
@@ -18,6 +18,6 @@
     		"js": ["jquery-3.5.1.min.js","mynet.js"]
     	}
     ],
-    "permissions": ["contextMenus","tabs", "activeTab","http://openapi.tuling123.com/*"]
+    "permissions": ["notifications","contextMenus","tabs", "activeTab","http://openapi.tuling123.com/*"]
 
 }
